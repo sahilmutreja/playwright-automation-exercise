@@ -2,7 +2,13 @@ import { Given, When, Then } from '@cucumber/cucumber';
 
 let browser, page;
 
-  When('user enters correct email address {string} and password {string}', function (string, string2) {
-    // Write code here that turns the phrase above into concrete actions
+const terminalUser = process.env.USER;
+const terminalPass = process.env.PASS;
+
+  When('user enters correct email address {string} and password {string}', async function (user, pass) {
+    if(terminalUser!=null || terminalUser!=""){
+      user = terminalUser;
+    }
+    await page.locator('#userEmail').fill(user);
     return 'pending';
   });
